@@ -48,7 +48,18 @@ img {
     max-width: 100%;
     height: auto;
 }
-
+input,
+textarea {
+  outline: none;
+}
+.button {
+    font-family: inherit;
+    cursor: pointer;
+    border-color: transparent;
+    border-radius: 4px;
+    color: var(--button-color);
+    background-color: var(--accent-color);
+  }
 .link {
     text-decoration: none;
     display: block;
@@ -58,26 +69,31 @@ img {
 .marker-list {
     list-style: none;
     padding: 0;
-    margin-bottom: 50px;
+    
 }
 
 /* header */
 .header {
     border-bottom: 1px solid #ececec;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 0.02em;
 }
 
-.container {
-    width: 1200px;
-    padding: 0 15px;
-    margin: 0 auto;
-}
-
-
-
-.flex-container {
+.head-cont {
+    min-height: 80px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-}
+  }
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+  
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
 .header-logo {
     font-family: var(--secondary-font), sans-serif;
@@ -100,6 +116,7 @@ img {
 
 .header-list {
     display: flex;
+    
 }
 
 .header-list>.item:not(:last-child) {
@@ -107,13 +124,14 @@ img {
 }
 
 .marker-list .nav-link {
+    display: flex;
     padding: 32px 0;
     display: block;
     font-size: var(--font-text);
-    font-weight: var(--font-weight-main);
+    font-weight: 500;
     line-height: 1.14;
     text-decoration: none;
-    color: var(--dark-color);
+    color: #212121;
     letter-spacing: 0.02em;
     list-style: none;
     transition: color var(--animation-transition);
@@ -727,60 +745,201 @@ img {
     
 }
 
-/* BACKDROP START*/
-
+/* МОДАЛЬНОЕ ОКНО "Заказать услуги"*/
 .backdrop {
     position: fixed;
-    left: 0;
     top: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: rgba(0, 0, 0, 0.2);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+  
     transition: opacity var(--animation-transition), visibility var(--animation-transition);
-}
-
-.backdrop.is-hidden {
+  
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .backdrop.is-hidden {
     opacity: 0;
+    pointer-events: none;
     visibility: hidden;
-    pointer-events: 0;
-}
-
-.modal {
+  }
+  .modal-order {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    width: 528px;
-    height: 581px;
-
-    background: var(--button-color);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
-        0px 1px 1px rgba(0, 0, 0, 0.14),
-        0px 2px 1px rgba(0, 0, 0, 0.2);
+  
+    min-width: 528px;
+    min-height: 581px;
+    padding: 40px;
+  
+    background-color: var(--button-color);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+      0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-}
-
-.btn-modal {
+  }
+  .btn-close-modal {
     position: absolute;
     top: 8px;
     right: 8px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    fill: #000000;
+  
+    transition: fill var(--animation-transition);
+  }
+  .btn-close-modal:hover,
+  .btn-close-modal:focus {
+    fill: var(--accent-color);
+  }
+  
+  /* Форма в модальном окне */
+  .form-modal-order {
+    display: flex;
+    flex-direction: column;
+  }
+  .title-form {
+    margin-bottom: 12px;
+  
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.15;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #212121;
+  }
+  /* Коробки input */
+  .comment-box {
+    margin-bottom: 20px;
+  }
+  
+  /* SVG иконки в форме */
+  .form-field {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .svg-form {
+    position: absolute;
+    top: 52%;
+    left: 12px;
+    transform: translateY(-50%);
+  
+    transition: fill var(--animation-transition);
+  }
+  /* Кастомизация input */
+  .input-form-order {
+    padding-top: 11px;
+    padding-right: 12px;
+    padding-bottom: 11px;
+    padding-left: 12px;
+  
+    width: 100%;
+    border: 1px solid rgba(33, 33, 33, 0.2);
+    border-radius: 4px;
+  
+    transition: border var(--animation-transition);
+  }
+  .input-form-order:not(:last-child) {
+    padding-left: 42px;
+  }
+  /* Стилизация для lable */
+  .name-input-order {
+    display: block;
+    text-align: start;
+    margin-bottom: 4px;
+  
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+  }
+  
+  .input-form-order {
+    display: block;
+    padding-left: 42px;
+    /* outline: none; */
+  }
+  
+  .input-form-order:focus {
+    border: 1px solid #2196f3;
+  }
+  .input-form-order:focus ~ .svg-form {
+    fill: var(--accent-color);
+  }
+  
+  /* Checkbox с принятием рассылки и соглашения */
+  .text-checkbox-order {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-
-    background: var(--button-color);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 30px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.71;
+    letter-spacing: 0.03em;
+    font-family: var(--main-font);
+    color: var(--primary-text-color);
+  }
+  .checkbox-policy {
+    appearance: none;
+    position: absolute;
+  }
+  .svg-checkbox {
+    display: inline-block;
+    width: 16px;
+    height: 15px;
+  
+    border: 2px solid #212121;
+    border-radius: 4px;
+    margin-right: 7px;
+  
+    transition: border-color var(--animation-transition), background-color var(--animation-transition),
+      background-image var(--animation-transition);
+  }
+  .checkbox-policy:checked + .svg-checkbox {
+    border-color: transparent;
+    background-color: var(--accent-color);
+    background-image: url(../images/icon-check.svg);
+    background-size: contain;
+    background-origin: border-box;
+  }
+  .checkbox-policy:focus + .svg-checkbox {
+    border-color: var(--accent-color);
+  }
+  .link-policy {
+    text-decoration: underline;
+    color: var(--accent-color);
+  }
+  
+  /* Кнопка заказа в модальном окне */
+  .btn-modal-form-order {
+    width: 200px;
+    padding-top: 10px;
+    padding-right: 55px;
+    padding-bottom: 10px;
+    padding-left: 55px;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.89;
+  
+    transition: background-color var(--animation-transition);
+  }
+  .btn-modal-form-order:hover,
+  .btn-modal-form-order:focus {
+    background-color: #188ce8;
+  }
+  
 /* OVERLAY START*/
 .img-wrapper {
     position: relative;
@@ -824,3 +983,99 @@ img {
     margin-right: 10px;
    
     }
+/* Footer Форма подписки */
+
+.container-subscription {
+    margin-left: 93px;
+  }
+  .form-title {
+    margin-bottom: 20px;
+  
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--button-color);
+  }
+  .footer-form {
+    display: flex;
+  }
+  .footer-email-input {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+  
+    /* identical to box height, or 125% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+  
+    color: rgba(255, 255, 255, 0.6);
+  
+    width: 358px;
+    padding-left: 16px;
+  
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    border-radius: 4px;
+  }
+  .footer-btn-subscrib {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 12px;
+    min-width: 200px;
+  
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.88;
+  }
+  .icon-subscribe {
+    margin-left: 10px;
+    fill: var(--button-color);
+  }
+  .form-title {
+    margin-bottom: 20px;
+  
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--button-color);
+  }
+  .footer-form {
+    display: flex;
+  }
+  .footer-email-input {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+  
+    /* identical to box height, or 125% */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+  
+    color: rgba(255, 255, 255, 0.6);
+  
+    width: 358px;
+    padding-left: 16px;
+  
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    border-radius: 4px;
+  }
+  .footer-btn-subscrib {
+    display: flex;
+    justify-content: center;
+  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 12px;
+    min-width: 200px;
+  }
+  .icon-subscribe {
+    margin-left: 10px;
+    fill: var(--button-color);
+  }
